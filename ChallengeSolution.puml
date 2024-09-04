@@ -1,0 +1,21 @@
+@startuml
+class challenge.ChallengeClass {
++ {static} short MAXIMUM_NORAD_ID
+- MongoCollection<Document> conjunctionsCollection
++ <<Create>> ChallengeClass(MongoCollection<Document>)
++ void adjustConjunctionsBasedOnTheta()
++ void adjustConjunctionBasedOnTheta(String)
++ void adjustConjunctionBasedOnTheta(Document)
+- boolean handleRiskPrediction(Document)
+- void adjustCollisionProbability(Document,double[])
+- double[] getTimeToTca(List<List<Document>>,int)
+- double[] getCollisionProbability(List<List<Document>>,int)
+- boolean areTrendsValid(List<List<Document>>)
+- boolean isTrendValid(Document)
+}
+class utils.Calculations {
++ {static} void analyze_theta(double[],double[],double[],double[],double[])
++ {static} void adjust_coll_prob(double[],double[],double[],double[],double[])
++ {static} boolean check_theta(double[])
+}
+@enduml

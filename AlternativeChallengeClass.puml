@@ -1,0 +1,38 @@
+@startuml
+class ChallengeClass {
++ {static} short MAXIMUM_NORAD_ID
+- ConjunctionDao conjunctionDao
+- CalculationsStrategy calculationsStrategy
++ <<Create>> ChallengeClass(ConjunctionDao, CalculationsStrategy)
++ void adjustConjunctionsBasedOnTheta()
++ void adjustConjunctionBasedOnTheta(String conjunctionId)
++ void adjustConjunctionBasedOnTheta(Conjunction)
+- adjustConjunction(Conjunction)
+}
+
+class Conjunction {
++ isValid()
++ canThetaBeCalculated()
+}
+
+interface CalculationsStrategy {
++ analyze_theta(Conjunction)
++ adjust_coll_prob(Conjunction)
++ check_theta(Conjunction)
+}
+
+class Calculations {
++ native {static} void analyze_theta(double[],double[],double[],double[],double[])
++ native {static} void adjust_coll_prob(double[],double[],double[],double[],double[])
++ native {static} boolean check_theta(double[])
+}
+
+interface ConjunctionDao {
+}
+
+CalculationsStrategy ..> Calculations: <<use>>
+CalculationsStrategy ..> Conjunction: <<use>>
+ChallengeClass ..> Conjunction: <<use>>
+ChallengeClass *-- CalculationsStrategy
+ChallengeClass *-- ConjunctionDao
+@enduml
